@@ -63,7 +63,7 @@ public class MemberController extends HttpServlet {
             result = AjaxResult.success("登录成功",memberVO);
             HttpSession session = req.getSession(true);
             session.setAttribute("loginMember",memberVO);
-            session.setAttribute("cart",memberVO);
+            session.setAttribute("cart",cartVO);
         } else  {
             LogOutputUtil.logger.error(loginName+"登录失败");
             result = AjaxResult.error(501,"用户名或密码错误");
