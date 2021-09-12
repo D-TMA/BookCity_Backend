@@ -1,9 +1,12 @@
 package controller.api;
 
 import com.alibaba.fastjson.JSON;
+import domain.dto.CartVO;
 import domain.dto.MemberVO;
 import service.MemberServiceIface;
+import service.ShoppingCartServiceIface;
 import service.impl.MemerServiceImpl;
+import service.impl.ShoppingCartServiceImpl;
 import utils.AjaxResult;
 import utils.LogOutputUtil;
 
@@ -18,6 +21,7 @@ import java.io.IOException;
 @WebServlet("/api/member")
 public class MemberController extends HttpServlet {
     MemberServiceIface memberService = new MemerServiceImpl();
+    ShoppingCartServiceIface shoppingCartService = new ShoppingCartServiceImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doGet(req, resp);
@@ -54,13 +58,15 @@ public class MemberController extends HttpServlet {
         MemberVO memberVO = memberService.login(loginName,loginPwd);
         AjaxResult result = null;
         if (memberVO!=null) {
+            CartVO cartVO = shoppingCartService.getShoppingCart(memberVO.getId());
             LogOutputUtil.logger.info(loginName+"登录成功");
             result = AjaxResult.success("登录成功",memberVO);
             HttpSession session = req.getSession(true);
             session.setAttribute("loginMember",memberVO);
+            session.setAttribute("cart",memberVO);
         } else  {
             LogOutputUtil.logger.error(loginName+"登录失败");
-            result = AjaxResult.error("用户名或密码错误");
+            result = AjaxResult.error(501,"用户名或密码错误");
         }
         resp.getWriter().write(JSON.toJSONString(result));
     }
