@@ -43,7 +43,7 @@ public class MerchandiseDao {
             ResultSet set = ps.executeQuery();
             while (set.next()) {
                 MerchandiseVO vo = new MerchandiseVO(set.getInt("id"), set.getInt("category"),
-                        set.getString("merName"), set.getDouble("price"), set.getDouble("sprice"),
+                        set.getString("merName"), set.getBigDecimal("price"), set.getBigDecimal("sprice"),
                         set.getString("merModel"), set.getString("picture"), set.getString("merDesc"),
                         set.getString("manufacturer"), set.getString("leaveFactoryDate"), set.getInt("special"));
                 merchandiseList.add(vo);
@@ -61,6 +61,11 @@ public class MerchandiseDao {
         return merchandiseList;
     }
 
+    /**
+     * 通过ID查询商品列表
+     * @param id
+     * @return
+     */
     public MerchandiseVO selectMerchandiseListById(int id) {
         MerchandiseVO vo = null;
         //1- 获得数据库连接
@@ -79,7 +84,7 @@ public class MerchandiseDao {
             ResultSet set = ps.executeQuery();
             if (set.next()) {
                 vo = new MerchandiseVO(set.getInt("id"), set.getInt("category"),
-                        set.getString("merName"), set.getDouble("price"), set.getDouble("sprice"),
+                        set.getString("merName"), set.getBigDecimal("price"), set.getBigDecimal("sprice"),
                         set.getString("merModel"), set.getString("picture"), set.getString("merDesc"),
                         set.getString("manufacturer"), set.getString("leaveFactoryDate"), set.getInt("special"));
             }

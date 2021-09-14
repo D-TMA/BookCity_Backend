@@ -12,6 +12,10 @@ public class CartSelectedMerVO extends CartSelectedMerPO {
     public CartSelectedMerVO() {
     }
 
+    public CartSelectedMerVO(Integer id, Integer cart, Integer merchandise, Integer number, BigDecimal price, BigDecimal money) {
+        super(id, cart, merchandise, number, price, money);
+    }
+
     public CartSelectedMerVO(Integer id, Integer cart, Integer merchandise, Integer number, BigDecimal price, BigDecimal money, String merName, BigDecimal merPrice) {
         super(id, cart, merchandise, number, price, money);
         this.merName = merName;

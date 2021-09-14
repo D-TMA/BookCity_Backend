@@ -1,11 +1,13 @@
 package domain;
 
+import java.math.BigDecimal;
+
 public class MerchandisePO {
     private Integer id;
     private Integer category;
     private String merName;
-    private Double price;
-    private Double sprice;
+    private BigDecimal price;
+    private BigDecimal sprice;
     private String merModel;
     private String picture;
     private String merDesc;
@@ -16,7 +18,8 @@ public class MerchandisePO {
     public MerchandisePO() {
     }
 
-    public MerchandisePO(Integer id, Integer category, String merName, Double price, Double sprice, String merModel, String picture, String merDesc, String manufacturer, String leaveFactoryDate, Integer special) {
+    public MerchandisePO(Integer id, Integer category, String merName, BigDecimal price, BigDecimal sprice, String merModel,
+                         String picture, String merDesc, String manufacturer, String leaveFactoryDate, Integer special) {
         this.id = id;
         this.category = category;
         this.merName = merName;
@@ -54,19 +57,19 @@ public class MerchandisePO {
         this.merName = merName;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
-    public Double getSprice() {
+    public BigDecimal getSprice() {
         return sprice;
     }
 
-    public void setSprice(Double sprice) {
+    public void setSprice(BigDecimal sprice) {
         this.sprice = sprice;
     }
 

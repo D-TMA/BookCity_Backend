@@ -24,4 +24,12 @@ public class MemberVO extends MemberPO {
     public void setLevelName(String levelName) {
         this.levelName = levelName;
     }
+
+    public int getFavourable() {
+        return favourable;
+    }
+
+    public void setFavourable(int favourable) {
+        this.favourable = favourable;
+    }
 }
