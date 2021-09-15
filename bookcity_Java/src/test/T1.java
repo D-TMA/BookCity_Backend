@@ -1,33 +1,50 @@
 package test;
 
-import com.alibaba.fastjson.JSON;
-import domain.dto.CategoryVO;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.io.*;
 
 public class T1 {
+    //输入一个字符串  判断该字符串是否包含非空字符
+    public static boolean TestString(String test) {
+        if ("".equals(test))
+            return true;
+        return false;
+    }
+
+    //打开文本文件 计算某个字符串出现得次数
+    public static int countOccurrenceNumber(File filename, String target) throws IOException {
+        FileReader fr = new FileReader(filename);
+        BufferedReader br = new BufferedReader(fr);
+        StringBuilder strb = new StringBuilder();
+        while (true) {
+            String line = br.readLine();
+            if (line == null) {
+                break;
+            }
+            strb.append(line);
+        }
+        String result = strb.toString();
+        int count = 0;
+        int index = 0;
+        while(true) {
+            index = result.indexOf(target, index);
+            if (index >= 0) {
+                index = index+target.length();
+                count++;
+            } else {
+                break;
+            }
+        }
+        br.close();
+        return count;
+    }
     public static void main(String[] args) {
-        List<CategoryVO> categoryList = new ArrayList<>();
-        CategoryVO vo = new CategoryVO();
-        vo.setId(1);
-        vo.setCateName("计算机类");
-        vo.setCateDesc("计算机类型书籍");
-        CategoryVO vo2 = new CategoryVO();
-        vo2.setId(2);
-        vo2.setCateName("英语类");
-        vo2.setCateDesc("英语类型书籍");
-        CategoryVO vo3 = new CategoryVO();
-        vo3.setId(3);
-        vo3.setCateName("历史类");
-        vo3.setCateDesc("历史类型书籍");
-
-        categoryList.add(vo);
-        categoryList.add(vo2);
-        categoryList.add(vo3);
-
-        //fastjson
-        String data = JSON.toJSONString(categoryList);
-        System.out.println(data);
+        System.out.println(TestString("123"));
+        System.out.println(TestString(""));
+        File file = new File("test.txt");
+        try {
+            System.out.println(countOccurrenceNumber(file,"abc"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
